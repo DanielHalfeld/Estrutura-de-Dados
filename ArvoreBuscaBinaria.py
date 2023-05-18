@@ -1,17 +1,16 @@
 from NoABB import No
-
 class ArvoreBuscaBinaria:
     def __init__(self):
         self.__raiz = None
     def getRaiz(self):
         return self.__raiz
     def setRaiz(self, n):
-        self__raiz = n
+        self.__raiz = n
     def arvoreVazia(self):
         return self.__raiz == None
     def criaNo(self, v):
         no = No()
-        no.getElemento().setValor(v)
+        no.getDados().setChave(v)
         return no
     def insereNo(self, v):
         if self.arvoreVazia():
@@ -19,17 +18,54 @@ class ArvoreBuscaBinaria:
         else:
             self.insere(None, self.getRaiz(), v)
     def insere(self, pai, atual, v):
-        if (atual != None):
-            if (v < atual.getElemento().getValor()):
+        if atual != None:
+            if v < atual.getDados().getChave(): # Alteração do elemento
                 self.insere(atual, atual.getFilhoEsquerda(), v)
             else:
                 self.insere(atual, atual.getFilhoDireita(), v)
         else:
             x = self.criaNo(v)
-            if (v < pai.getElemento().getValor()):
+            if v < pai.getDados().getChave():
                 pai.setFilhoEsquerda(x)
             else:
-                pai.getFilhoDireita(x)
+                pai.setFilhoDireita(x)
                 
-       
+    def emOrdem(self, n):
+        if n != None:
+            self.emOrdem(n.getFilhoEsquerda())
+            print(n.getDados().getChave())
+            self.emOrdem(n.getFilhoDireita())
     
+    def preOrdem(self, n):
+        if n != None:
+            print(n.getDados().getChave())
+            self.preOrdem(n.getFilhoEsquerda())
+            self.preOrdem(n.getFilhoDireita())
+
+    def posOrdem(self, n):
+        if n != None:
+            self.posOrdem(n.getFilhoEsquerda())
+            self.posOrdem(n.getFilhoDireita())
+            print(n.getDados().getChave())
+
+    # Exercício 1
+    def decrescente(self, n):
+        if n != None:
+            self.decrescente(n.getFilhoDireita())
+            print(n.getDados().getChave())
+            self.decrescente(n.getFilhoEsquerda())
+    
+    def pesquisa(self, n, v):
+        if n != None:
+            if v == n.getDados().getChave():
+                return True
+            elif v < n.getDados().getChave():
+                return self.pesquisa(n.getFilhoEsquerda(), v)
+            else:
+                return self.pesquisa(n.getFilhoDireita(), v)
+        return False        
+    
+    def qtd(self, n):
+        if n != None:
+            return 1 + self.qtd(n.getFilhoEsquerda()) + self.qtd(n.getFilhoDireita())
+        return 0
