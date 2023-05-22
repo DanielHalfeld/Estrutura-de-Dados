@@ -73,3 +73,20 @@ class ArvoreBuscaBinaria:
     def soma(self, n):
         if n != None:
             return n.getDados().getChave() + self.soma(n.getFilhoEsquerda()) + self.soma(n.getFilhoDireita())
+        return 0
+    
+    def menor(self, n):
+        if n != None:
+            if n.getFilhoEsquerda() != None:
+                return self.menor(n.getFilhoEsquerda())
+            else:
+                return n.getDados().getChave()
+        return None
+    
+    def maior(self, n):
+        if n != None:
+            if n.getFilhoDireita() != None:
+                return self.maior(n.getFilhoDireita())
+            else:
+                return n.getDados().getChave()
+        return None
