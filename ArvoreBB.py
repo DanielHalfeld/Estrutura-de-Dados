@@ -73,20 +73,36 @@ class ArvoreBuscaBinaria:
     def soma(self, n):
         if n != None:
             return n.getDados().getChave() + self.soma(n.getFilhoEsquerda()) + self.soma(n.getFilhoDireita())
-        return 0
     
-    def menor(self, n):
+    def menorElem(self, n):
         if n != None:
             if n.getFilhoEsquerda() != None:
-                return self.menor(n.getFilhoEsquerda())
+                return self.menorElem(n.getFilhoEsquerda())
             else:
-                return n.getDados().getChave()
+                return n 
         return None
     
-    def maior(self, n):
+    def maiorElem(self, n):
         if n != None:
             if n.getFilhoDireita() != None:
-                return self.maior(n.getFilhoDireita())
+                return self.maiorElem(n.getFilhoDireita())
             else:
-                return n.getDados().getChave()
+                return n 
         return None
+
+    def mostraNivelANivel(self):
+        f = []
+        f.append(self.getRaiz())
+        while len(f) > 0:
+            atual = f.pop(0)
+            print(atual.getDados().getChave())
+            if atual.getFilhoEsquerda() != None:
+                f.append(atual.getFilhoEsquerda())
+            if atual.getFilhoDireita() != None:
+                f.append(atual.getFilhoDireita())
+
+    def q2(self, no):
+        if no!= None:
+            print(no.getDados().getChave())
+            self.q2(no.getFilhoDireita())
+            self.q2(no.getFilhoEsquerda())
